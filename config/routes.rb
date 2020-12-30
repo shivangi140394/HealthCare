@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   resources :therapists
   resources :appointments do
-    patch :cancle_appointment, on: :member
+    get :cancle_appointment, on: :member
+    patch :cancle
   end
 end

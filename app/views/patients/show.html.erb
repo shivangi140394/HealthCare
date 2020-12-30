@@ -11,14 +11,16 @@
       </span>
     </div>
     <% if current_user.role.therapist? %>
-      <div class="col-sm-6 text-right">
-        <%= link_to cancle_appointment_appointment_path( patient_id: @patient, therapist_id: @current_therapist, id: @appointment, status: :cancle), class: 'btn edit-user btn-primary pull-right m-l-15 w-25' do %>
-          Cancle Appointment
-        <% end %>
-        <%= link_to appointment_path( patient_id: @patient, therapist_id: @current_therapist, id: @appointment, status: :confirm), method: :put, class: 'btn edit-user btn-primary pull-right m-l-15 w-25' do %>
-          Confirm Appointment
-        <% end %>
-      </div>
+      <% unless ('confirm' 'cancle').include? @appointment.status  %>
+        <div class="col-sm-6 text-right">
+          <%= link_to cancle_appointment_appointment_path( patient_id: @patient, therapist_id: @current_therapist, id: @appointment, status: :cancle), remote: true, class: 'btn edit-user btn-primary pull-right m-l-15 w-25' do %>
+            Cancle Appointment
+          <% end %>
+          <%= link_to appointment_path( patient_id: @patient, therapist_id: @current_therapist, id: @appointment, status: :confirm), method: :put, class: 'btn edit-user btn-primary pull-right m-l-15 w-25' do %>
+            Confirm Appointment
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
 </main>
 </div>
