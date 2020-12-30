@@ -5,6 +5,10 @@ class AppointmentsController < ApplicationController
     @appointments = Appointment.all
   end
 
+  def show
+    @appointment = Appointment.find(params[:id])
+  end
+
   def new
     @appointment = Appointment.new
     @therapist = Therapist.where(id: params[:therapist_id])
@@ -33,7 +37,16 @@ class AppointmentsController < ApplicationController
   end
 
   def cancle_appointment
-    binding.pry
-    
+    @appointment = Appointment.find(params[:id])
+  end
+
+  def cancle
+    @appointment = Appointment.find(params[:appointment_id])
+    @appointment.update(status: params[:appointment][:status],
+                        remove_appointment: params[:appointment][:remove_appointment])
+    @patient = Patient.find(params[:appointment][:patient_id])
+    @therapist = Therapist.find(params[:appointment][:therapist_id])
+    AppointmentBookingMailer.with(data: @appointment, patient: @patient,
+                                  therapist: @therapist).cancle_appointment_booking.deliver_now
   end
 end

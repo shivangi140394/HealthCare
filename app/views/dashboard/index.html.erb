@@ -45,14 +45,16 @@
 
     <div class="container">
       <div class="row">
-        <div class="card col" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Patients Register</h5>
-            <h6 class="card-subtitle mb-2 text-muted">HealthCare</h6>
-            <p class="card-text">Number of patients register.<br>
-              <%= @patients.count %></p>
+        <% if current_user.role.admin? %>
+          <div class="card col" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Patients Register</h5>
+              <h6 class="card-subtitle mb-2 text-muted">HealthCare</h6>
+              <p class="card-text">Number of patients register.<br>
+                <%= @patients.count %></p>
+            </div>
           </div>
-        </div>
+        <% end %>
 
         <% unless current_user.role.therapist? %>
           <div class="card col" style="width: 18rem;">

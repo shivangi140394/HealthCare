@@ -10,7 +10,7 @@ class PatientsController < ApplicationController
   def show
     @patient = Patient.find(params[:id])
     @current_therapist = Therapist.find_by_user_id(current_user.id)
-    @appointment = Appointment.find_by(patient_id: params[:id])
+    @appointment = Appointment.find_by(id: params[:data])
   end
 
   def new
@@ -33,7 +33,6 @@ class PatientsController < ApplicationController
   end
 
   def update
-    binding.pry
     @patient = Patient.find(params[:id])
     if @patient.update(patient_params)
       flash[:success] = "Patient #{@patient.name} was updated successfully"

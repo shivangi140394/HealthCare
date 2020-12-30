@@ -5,7 +5,8 @@
         <h5 class="modal-title">Delete Appointment</h5>
       </div>
       <div class="modal-body">
-        <%= simple_form_for @appointment do |f| %>
+        <%= simple_form_for @appointment, url: appointment_cancle_path(@appointment.id),
+                                  method: :patch do |f| %>
           <div class="row">
             <div class="col">
               <%= f.input :therapist_id, as: :hidden, input_html: {value: params[:therapist_id]}%>

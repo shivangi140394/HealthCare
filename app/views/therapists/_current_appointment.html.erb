@@ -3,7 +3,7 @@
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Contact</th>
-      <th scope="col">Description</th>
+      <th scope="col">Status</th>
       <th scope="col">Details</th>
     </tr>
   </thead>
@@ -13,7 +13,7 @@
         <td><%= appointment.patient.name %></td>
         <td><%= appointment.patient.phone %></td>
         <td><%= appointment.status %></td>
-        <td><%= link_to 'Detail', patient_path(appointment.patient) %></td>
+        <td><%= link_to 'Detail', patient_path(appointment.patient, data: appointment.id) %></td>
       </tr>
     </tbody>
   <% end %>

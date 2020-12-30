@@ -4,10 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p><b>Your Appointment is Confirm with: </b></p>
+    <p>Hi<%= @patient.name %></p>
+    <p><b>Your Appointment Cancled: </b></p>
+    <p>Due to <%= @appointment.remove_appointment %>
+    <p>Thanks</p>
     <p> Dr. <%= @therapist.name %>
     <p> Contact No: <%= @therapist.contact_no %>
     <p> Specialization: <%= @therapist.specialization %>
-    <p> Timing: <%= @therapist.available_time_to.strftime("%I:%M%p") %>
   </body>
 </html>
