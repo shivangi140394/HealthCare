@@ -1,0 +1,14 @@
+<%= simple_form_for @therapist do |form| %>
+  <%= form.input :name %>
+  <%= form.input :email, input_html: {value: current_user.email} %>
+  <%= form.input :contact_no %>
+  <%= form.input :specialization %>
+  <%= form.input :age %>
+  <%= form.input :available_time_to, as: :time %>
+  <%= form.input :available_time_from, as: :time %>
+  <%= form.input :available_days, as: :check_boxes, collection: ['All', 'Monday', 'Tuesday', 'Wednesday','Thursday', 'Friday','Saturday'] %>
+  <%= form.input :experience %>
+  <%= form.input :degree %>
+  <%= form.input :gender, collection: (['Male', 'Female']), prompt: 'Select' %>
+  <%= form.submit "Save", class: 'btn btn-success' %>
+<% end %>

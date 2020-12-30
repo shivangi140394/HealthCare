@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-12 col-md-3">
+    <div class="mb-3">
+      <% current_patient = @current_patient%>
+      <% if current_patient.present?  %>
+        <%= link_to edit_patient_path(@current_patient), class: "btn btn-primary" do %>
+          Profile edit
+        <% end %>
+      <% else%>
+        <%= link_to new_patient_path, class: "btn btn-primary" do %>
+          Profile add
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="alert alert-primary">
+      <h4 class="alert-heading">
+        Welcome to the Healthcare
+      </h4>
+    </div>
+    <% if @therapists.present? %>
+      <%= render '/therapists/therapist', current_patient: @current_patient %>
+    <% else %>
+      <div class="text-muted">
+        The are no therapist
+      </div>
+    <% end %>
+  </div>
+</div>

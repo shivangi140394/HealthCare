@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-12 col-md-3">
+    <div class="mb-3">
+      <% if current_user.role.patient? %>
+        <% if @current_patient.present? %>
+          <%= link_to edit_patient_path(@current_patient), class: "btn btn-primary" do %>
+            Profile edit
+          <% end %>
+        <% else%>
+          <%= link_to new_patient_path, class: "btn btn-primary" do %>
+            Profile add
+          <% end %>
+        <% end %>
+      <% else %>
+        <% if @current_therapist.present?  %>
+          <%= link_to edit_therapist_path(@current_therapist), class: "btn btn-primary" do %>
+            Profile edit
+          <% end %>
+        <% else%>
+          <%= link_to new_therapist_path, class: "btn btn-primary" do %>
+            Profile add
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+    
+  <div class="col">
+    <div class="alert alert-primary">
+      <h4 class="alert-heading">
+        Welcome to the Healthcare
+      </h4>
+    </div>
+    <% if current_user.role.patient? %>
+      <%= render 'therapist'%>
+    <% end %>
+    <% if @current_appointments.present? %>
+      <div class="col">
+        <h4>Appointments</h4>
+      </div>
+      <%= render 'current_appointment'%>
+    <% end %>
+  </div>
+</div>
