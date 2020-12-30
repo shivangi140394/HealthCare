@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col">
+    <div class="alert alert-primary">
+      <h4 class="alert-heading">
+        Welcome to the Healthcare
+      </h4>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Contact No</th>
+          <th>specialization</th>
+          <th>Status</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @patient_appointments.each do |appointment| %>
+          <tr>
+            <td><%= appointment.therapist.name %></td>
+            <td><%= appointment.therapist.contact_no %></td>
+            <td><%= appointment.therapist.specialization %></td>
+            <td><%= appointment.status %></td>
+            <td><%= link_to "Delete", appointment_path(appointment), method: :delete,  data: { confirm: "Are you sure want to delete?" }%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

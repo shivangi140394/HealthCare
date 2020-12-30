@@ -1,0 +1,12 @@
+<%= simple_form_for @patient do |form| %>
+  <%= form.input :name %>
+  <%= form.input :email, input_html: {value: current_user.email} %>
+  <%= form.input :phone %>
+  <%= form.input :address %>
+  <%= form.input :city %>
+  <%= form.input :state %>
+  <%= form.input :gender, collection: (['Male', 'Female']), prompt: 'Select' %>
+  <%= form.input :description, as: :text %>
+  <%= form.file_field :images, multiple: :true%>
+  <%= form.submit "Save", class: 'btn btn-success' %>
+<% end %>

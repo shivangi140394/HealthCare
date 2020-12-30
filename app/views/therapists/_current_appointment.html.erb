@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Description</th>
+      <th scope="col">Details</th>
+    </tr>
+  </thead>
+  <% @current_appointments.each do |appointment| %>
+    <tbody>
+      <tr data-link="<%= patients_path(appointment.patient) %>">
+        <td><%= appointment.patient.name %></td>
+        <td><%= appointment.patient.phone %></td>
+        <td><%= appointment.status %></td>
+        <td><%= link_to 'Detail', patient_path(appointment.patient) %></td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>

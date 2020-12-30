@@ -1,0 +1,108 @@
+<main class="main-content">
+  <!-- <div class="container-fluid"> -->
+    <div class="row heading-border-line">
+      <div class="col-lg-6 text-left">
+        <%= link_to  do %>
+          <span>
+            <%= image_tag 'back-arrow.png' %>
+          </span>
+        <% end %>
+        <span class="mrg-left-5 h4">
+          <%= @therapist.name %>
+        </span>
+      </div>
+        <div class="col-sm-6 text-right">
+          <%= link_to new_appointment_path(therapist_id: @therapist, patient_id: @current_patient, status: :book), remote: true, class: 'btn edit-user btn-primary pull-right m-l-15 w-25' do %>
+            Book Appointment
+          <% end %>
+        </div>
+      </div>
+      </main>
+    </div>
+
+    <div class="col-md-4"></div>
+    <div class="row card">
+      <div class="col-md-8">
+        <h4 class="m-l-15 text-left mrg-top-15 mrg-bottom-15">Personal Info</h4></br>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="font-weight-bold">Name</div>
+            <div>
+              <%= @therapist.name %>
+            </div>
+          </div>
+        
+    	    <div class="col-md-4">
+    	      <div class="font-weight-bold">Contact Info</div>
+    	      <div>
+    	        <%= @therapist.contact_no %>
+    	      </div>
+    	    </div>
+        </div>
+      </div>
+
+      <div class="col-md-4"></div>
+      <div class="col-md-8 mrg-bottom-15">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="font-weight-bold">Specialization</div>
+            <div>
+              <%= @therapist&.specialization %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="font-weight-bold">Age</div>
+            <div>
+              <%= @therapist&.age %>
+            </div>
+          </div>
+        </div>
+        <div class="row mrg-top-5">
+          <div class="col-md-4">
+            <div class="font-weight-bold">Available Days</div>
+            <div>
+              <%= @therapist&.available_days %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="font-weight-bold">Degree</div>
+            <div>
+              <%= @therapist&.degree %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="font-weight-bold">Gender</div>
+            <div>
+              <%= @therapist&.gender %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="font-weight-bold">Experience</div>
+            <div>
+              <%= @therapist&.experience %> Years
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="font-weight-bold">Available Time From</div>
+              <div>
+                <%= @therapist&.available_time_to.strftime("%I:%M%p") %>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="font-weight-bold">Available Time From</div>
+              <div>
+                <%= @therapist&.available_time_from.strftime("%I:%M%p") %>
+              </div>
+            </div>
+          </div>
+      <div class="col-md-4"></div>
+    </div>
+  <!-- </div> -->
+</main>

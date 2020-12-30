@@ -1,0 +1,39 @@
+<div id="contact-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Book Appointment</h5>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @appointment do |f| %>
+          <div class="row">
+            <div class="col">
+              <%= f.input :therapist_id, as: :hidden, input_html: {value: params[:therapist_id]}%>
+              <%= f.input :patient_id, as: :hidden, input_html: {value: params[:patient_id]}%>
+              <%= f.input :status, as: :hidden, input_html: {value: params[:status]}%>
+              <%= f.input :name, input_html: {value: @therapist.last.name}, disabled: true %>
+              <%= f.input :specialization, input_html: {value: @therapist.last.specialization}, disabled: true %>
+              <div class="row">
+                <div class="col">
+                  <%= f.input :time_to, input_html: {value: @therapist.last.available_time_to.strftime("%I:%M%p")}, disabled: true %>
+                </div>
+                <div class="col">
+                  <%= f.input :time_from, input_html: {value: @therapist.last.available_time_from.strftime("%I:%M%p")}, disabled: true %>
+                </div>
+              </div>
+              <%= f.input :weekdays, as: :check_boxes, input_html: {value: @therapist.last.available_days}, disabled: true %>
+              <%= f.input :description, as: :text, input_html: {value: @patient.last.description}, disabled: true %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-primary" data-dismiss="modal" onclick="javascript:window.location.reload()" type="button">
+              Close 
+            </button>
+            <%= f.submit "Save", class: 'btn btn-success'  %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
