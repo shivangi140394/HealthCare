@@ -9,7 +9,6 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("bootstrap")
-require("gmaps/google")
 
 import $ from "jquery"
 document.addEventListener("turbolinks:load", () => {
@@ -24,16 +23,4 @@ document.addEventListener("turbolinks:load", () => {
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import 'bootstrap';
-import Turbolinks from 'turbolinks';
-import { initMapbox } from '../plugins/mapbox';
-
-const turbolinks = Turbolinks.start();
-
-document.addEventListener('turbolinks:load', () => {
-  initMapbox();
-});
-
-document.addEventListener("turbolinks:load", () => {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+	import 'bootstrap';
