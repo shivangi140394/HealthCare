@@ -4,7 +4,7 @@ class Appointment < ApplicationRecord
   DAYS = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].freeze
   enumerize :weekdays, in: DAYS, multiple: true, default: -> { default_weekdays }
 
-  STATUS = %w[book confirm cancle].freeze
+  STATUS = %w[book confirm cancel].freeze
   enumerize :status, in: STATUS, default: STATUS.first, predicates: true, scope: true
   validates :status, inclusion: { in: STATUS }, presence: true
 
