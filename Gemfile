@@ -36,6 +36,11 @@ gem 'enumerize'
 gem 'jquery-rails'
 gem 'simple_form'
 
+gem 'autoprefixer-rails'
+gem 'font-awesome-sass', '~> 5.6.1'
+
+gem 'gmaps4rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

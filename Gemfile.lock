@@ -94,8 +94,11 @@ GEM
     erubi (1.10.0)
     execjs (2.7.0)
     ffi (1.13.1)
+    font-awesome-sass (5.6.1)
+      sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    gmaps4rails (2.1.2)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.1)
@@ -258,12 +261,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.3.1)
   byebug
   capybara (>= 2.15)
   devise
   enumerize
+  font-awesome-sass (~> 5.6.1)
+  gmaps4rails
   jbuilder (~> 2.7)
   jquery-rails
   letter_opener
