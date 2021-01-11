@@ -272,7 +272,7 @@ DEPENDENCIES
   gmaps4rails
   jbuilder (~> 2.7)
   jquery-rails
-  letter_opener
+  letter_opener (~> 1.0)
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   pry-byebug
