@@ -1,1 +1,0 @@
-json.array! @therspists, partial: 'therapists/therapist', as: :therapist
