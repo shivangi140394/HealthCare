@@ -23,6 +23,7 @@ class TherapistsController < ApplicationController
   end
 
   def create
+    @therapist = Therapist.new(therapist_params)
     @therapist.user_id = current_user.id
 
     respond_to do |format|
