@@ -21,7 +21,6 @@
                   <%= f.input :time_from, input_html: {value: @therapist.last.available_time_from.strftime("%I:%M%p")}, disabled: true %>
                 </div>
               </div>
-              <% binding.pry %>
               <%= f.input :weekdays, as: :check_boxes, input_html: {value: @therapist.first.available_days}, disabled: true %>
               <%= f.input :description, as: :text, input_html: {value: @patient.last.description}, disabled: true %>
             </div>

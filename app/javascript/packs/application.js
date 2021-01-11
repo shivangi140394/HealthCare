@@ -9,7 +9,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("bootstrap")
-require("gmaps_google")
+require("gmaps/google")
 
 import $ from "jquery"
 document.addEventListener("turbolinks:load", () => {

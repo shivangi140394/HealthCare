@@ -6,6 +6,10 @@ class TherapistsController < ApplicationController
 
   def index
     @therapists = Therapist.all
+    @hash = Gmaps4rails.build_markers(@therapists) do |therapist, marker|
+      marker.lat therapist.latitude
+      marker.lng therapist.longitude
+    end
     @current_therapist = Therapist.find_by_user_id(current_user.id) if current_user.id.present?
     @current_appointments = Appointment.where(therapist_id: @current_therapist.id) if @current_therapist.present?
   end

@@ -2,16 +2,12 @@ class PatientsController < ApplicationController
   before_action :load_entity, only: %i[show edit update destroy]
 
   def index
-    @therapists = Therapist.where.not(latitude: nil, longitude: nil)
     @therapists = Therapist.all
     @patients = Patient.all
     @current_patient = Patient.find_by_user_id(current_user.id)
-
-    @geojson = build_geojson
   end
 
   def show
-    @patient = Patient.find(params[:id])
     @current_therapist = Therapist.find_by_user_id(current_user.id)
     @appointment = Appointment.find_by(id: params[:data])
   end
