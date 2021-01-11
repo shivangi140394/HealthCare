@@ -2,6 +2,7 @@
 
 class TherapistsController < ApplicationController
   before_action :current_patient, only: [:index]
+  before_action :set_therapist, only: %i[show edit update destroy]
 
   def index
     @therapists = Therapist.all
@@ -10,7 +11,6 @@ class TherapistsController < ApplicationController
   end
 
   def show
-    @therapist = Therapist.find(params[:id])
     @current_patient = Patient.find_by_user_id(current_user.id)
   end
 
@@ -19,28 +19,30 @@ class TherapistsController < ApplicationController
   end
 
   def create
-    @therapist = Therapist.new(therapist_params)
     @therapist.user_id = current_user.id
 
-    if @therapist.save
-      flash[:success] = "Patient #{@therapist&.name} was register successfully"
-      redirect_to therapists_path
-    else
-      render :new
+    respond_to do |format|
+      if @therapist.save
+        format.html { redirect_to therapists_path(@therapist) }
+        format.json { render :show, status: :created, location: @therapist }
+      else
+        format.html { render :new }
+        format.json { render json: @therapist.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-  def edit
-    @therapist = Therapist.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @therapist = Therapist.find(params[:id])
-    if @therapist.update(therapist_params)
-      flash[:success] = "Patient #{@therapist&.name} was updated successfully"
-      redirect_to therapists_path
-    else
-      render :new
+    respond_to do |format|
+      if @therapist.update(therapist_params)
+        format.html { redirect_to therapists_path }
+        format.json { render :show, status: :ok, location: @therapist }
+      else
+        format.html { render :edit }
+        format.json { render json: @therapist.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -49,7 +51,12 @@ class TherapistsController < ApplicationController
   def therapist_params
     params.require(:therapist).permit(:user_id, :name, :contact_no, :specialization,
                                       :age, :available_time_to, :available_time_from,
-                                      :degree, :experience, :gender, :email, available_days: [])
+                                      :degree, :experience, :gender, :email, :address,
+                                      :latitude, :longitude, available_days: [])
+  end
+
+  def set_therapist
+    @therapist = Therapist.find(params[:id])
   end
 
   def current_patient
