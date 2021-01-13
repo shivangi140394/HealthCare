@@ -1,0 +1,87 @@
+<div class="row">
+  <%= render partial: 'shared/personal_info' %>
+  <div class="col">
+    <div class="alert alert-primary">
+      <h4 class="alert-heading">
+        Welcome to the Healthcare
+      </h4>
+    </div>
+    <div style='width: 800px;'>  
+      <div id="map" style='width: 800px; height: 200px;'></div>  
+    </div>
+    <div class='card'></div>
+    <div class='row'>
+      <div class="col-lg-6 text-left">
+        <%= link_to root_path do %>
+          <span>
+            <%= image_tag 'back-arrow.png' %>
+          </span>
+        <% end %>
+        <span class="h4">
+          Therapists 
+        </span>
+      </div>
+    </div>
+    
+    <div class='card'></div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Specialization</th>
+          <th scope="col">Experience</th>
+          <th scope="col">Details</th>
+        </tr>
+      </thead>
+      <% @therapists.each do |therapist| %>
+        <tbody>
+          <tr>
+            <td><%= therapist.name %></td>
+            <td><%= therapist.specialization %></td>
+            <td><%= therapist.experience %></td>
+            <td>
+              <% if @current_patient.present?  %>
+                <%= link_to 'Details', patient_show_therapist_path(id: therapist)  %>
+              <% else %>
+                <%= link_to new_patient_path do %>
+                  Details
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+<script type="text/javascript">  
+  handler = Gmaps.build('Google');
+  handler.buildMap({
+      provider: {
+        disableDefaultUI: true
+        // pass in other Google Maps API options here
+      },
+      internal: {
+        id: 'map'
+      }
+    },
+    function(){
+      markers = handler.addMarkers([
+        {
+          "lat": 0,
+          "lng": 0,
+          "picture": {
+            "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
+            "width":  32,
+            "height": 32
+          },
+          "infowindow": "hello!"
+        }
+      ]);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+    }
+  );
+</script>

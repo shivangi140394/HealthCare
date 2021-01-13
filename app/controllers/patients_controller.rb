@@ -1,15 +1,18 @@
 class PatientsController < ApplicationController
   before_action :load_entity, only: %i[show edit update destroy]
+  # before_action :therapists_restric 
 
   def index
     @therapists = Therapist.all
     @patients = Patient.all
     @current_patient = Patient.find_by_user_id(current_user.id)
+    current_login_user
   end
 
   def show
     @current_therapist = Therapist.find_by_user_id(current_user.id)
     @appointment = Appointment.find_by(id: params[:data])
+    current_login_user
   end
 
   def new
@@ -47,7 +50,22 @@ class PatientsController < ApplicationController
   end
 
   def patient_appointments
-    @patient_appointments = Appointment.where(patient_id: params[:data])
+    if params[:locale].present?
+      @patient_appointments = Appointment.where(patient_id: params[:patient_id], status: params[:locale])
+    else
+      @patient_appointments = Appointment.where(patient_id: params[:patient_id])
+    end
+    current_login_user
+  end
+
+  def therapists
+    @therapists = Therapist.all
+    current_login_user
+  end
+
+  def show_therapist
+    @show_therapist = Therapist.find_by(id: params[:id])
+    current_login_user
   end
 
   protected

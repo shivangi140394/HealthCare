@@ -1,0 +1,58 @@
+<div class="col-12 col-md-3">
+  <div class="mb-3">
+  <nav class="nav flex-column">
+    <% if @current_patient.present? || @current_therapist.present? %>
+      <% if current_user.role.present? %> 
+        Hi...
+        <p> You Logged in as <%= current_user.role %></p>
+        <% if current_user.role.patient? %> 
+        <h4> <%= current_user.patients.first.name %> </h4><br>
+          <br>
+          <%= link_to edit_patient_path(@current_patient), class: "btn btn-outline-primary" do %>
+            Profile edit
+          <% end %>
+        <% else %>
+          <h4><%= current_user.therapists.first.name %></h4>
+          <br>
+          <%= link_to edit_therapist_path(@current_therapist), class: "btn btn-outline-primary" do %>
+            Profile edit
+          <% end %>
+        <% end %>
+        </p>
+      <% else%>
+        Click here to select the role <%= link_to 'Edit Role', edit_user_registration_path, class: 'btn btn-outline-primary' %>
+      <% end %>
+    <% else %>
+      <% if current_user.role.patient? %>
+        <%= link_to new_patient_path, class: "btn btn-outline-primary" do %>
+          Profile add
+        <% end %>
+      <% else %>
+        <%= link_to new_therapist_path, class: "btn btn-outline-primary" do %>
+          Profile add
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if current_user.role.therapist? &&  @current_therapist.appointments.present? %>
+      <%= link_to therapist_appointments_path(@current_therapist.id), class: "btn btn-outline-primary" do %>
+        Appointments
+      <% end %>
+    <% else %>
+      <% unless current_user.role.patient? %>
+        You dont have any appointment...
+      <% end %>
+    <% end %>
+
+    <% if current_user.role.patient? && @current_patient.appointments.present? %>
+      <%= link_to  patient_patient_appointments_path(@current_patient), class: 'btn btn-outline-primary' do %>
+        Confirm Appointment
+      <% end %>
+    <% else %>
+      <% unless current_user.role.therapist? %>
+        You haven't book any appointment yet... 
+      <% end %>
+    <% end %>
+    </nav>
+  </div>
+</div>

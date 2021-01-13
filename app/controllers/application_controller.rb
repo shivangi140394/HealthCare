@@ -21,5 +21,10 @@ class ApplicationController < ActionController::Base
 
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password, :role)}
   end
+
+  def current_login_user
+    @current_patient = Patient.find_by_user_id(current_user.id)
+    @current_therapist = Therapist.find_by_user_id(current_user.id)
+  end
 end
 

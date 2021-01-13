@@ -1,0 +1,105 @@
+<div class="row">
+  <%= render partial: 'shared/personal_info' %>
+  <div class="col">
+    <main class="main-content">
+      <div class="row heading-border-line">
+        <div class="col-lg-6 text-left">
+          <%= link_to patient_therapists_path(@show_therapist.id) do %>
+            <span>
+              <%= image_tag 'back-arrow.png' %>
+            </span>
+          <% end %>
+          <span class="h4">
+            <%= @show_therapist.name %>
+          </span>
+        </div>
+      </div>
+    </main>
+
+    <div class="card">
+      <h5 class="card-header">
+        Personal Information
+      </h5>
+      <div class="card-body">
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="font-weight-bold">Name</div>
+              <div>
+                <i> <%= @show_therapist.name %></i>
+              </div>
+            </div>
+          
+            <div class="col-md-6">
+              <div class="font-weight-bold">Contact Info</div>
+              <div> 
+                <i> <%= @show_therapist.contact_no %></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="font-weight-bold">Specialization</div>
+              <div>
+                <i> <%= @show_therapist.specialization %></i>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="font-weight-bold">Age</div>
+              <div>
+                <i> <%= @show_therapist.age %> </i>
+              </div>
+            </div>
+          </div>
+          <div class="row mrg-top-5">
+            <div class="col-md-6">
+              <div class="font-weight-bold">Degree</div>
+              <div>
+                <i><%= @show_therapist.degree %> </i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="font-weight-bold">Gender</div>
+              <div>
+                <i> <%= @show_therapist.gender  %></i>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="font-weight-bold">Experience</div>
+              <div>
+                <i> <%= @show_therapist.gender  %></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4"></div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="font-weight-bold">Available Time To</div>
+                <div>
+                  <i> <%= @show_therapist.available_time_to.strftime("%I:%M%p")  %></i>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="font-weight-bold">Available Time To</div>
+                <div>
+                  <i> <%= @show_therapist.available_time_from.strftime("%I:%M%p")  %></i>
+                </div>
+              </div>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
