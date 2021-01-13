@@ -1,21 +1,56 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Contact</th>
-      <th scope="col">Status</th>
-      <th scope="col">Details</th>
-    </tr>
-  </thead>
-  <% @therapist_appointments.each do |appointment| %>
-    <tbody>
-      <tr data-link="<%= patients_path(appointment.patient) %>">
-        <td><%= appointment.patient.name %></td>
-        <td><%= appointment.patient.phone %></td>
-        <td><%= appointment.status %></td>
-        <% binding.pry %>
-        <td><%= link_to 'Detail', patient_path(appointment.patient) %></td>
-      </tr>
-    </tbody>
-  <% end %>
-</table>
+<div class="row">
+  <%= render partial: 'shared/personal_info' %>
+  <div class="col">
+    <div class="alert alert-primary">
+      <h4 class="alert-heading">
+        Welcome to the Healthcare
+      </h4>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 text-left">
+        <%= link_to therapists_path do %>
+          <span>
+            <%= image_tag 'back-arrow.png' %>
+          </span>
+        <% end %>
+        <span class="h4">
+          Appointments 
+        </span>
+      </div>
+      
+      <div class="col">
+        <div class="col-ml-12 text-right">
+          <div class="btn-group">
+          <%= link_to therapist_appointments_path(locale: 'book'), class: 'btn btn-primary pull-right btn-xl' do %>
+              Book
+          <% end %>
+          <%= link_to therapist_appointments_path(locale: 'confirm'), class: 'btn btn-primary pull-right btn-xl' do %>
+              Confirm
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='card'></div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Contact</th>
+          <th scope="col">Status</th>
+          <th scope="col">Details</th>
+        </tr>
+      </thead>
+      <% @therapist_appointments.each do |appointment| %>
+        <tbody>
+          <tr data-link="<%= patients_path(appointment.patient) %>">
+            <td><%= appointment.patient.name %></td>
+            <td><%= appointment.patient.phone %></td>
+            <td><%= appointment.status %></td>
+            <td><%= link_to 'Detail', therapist_appointment_path(id: appointment.id) %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>

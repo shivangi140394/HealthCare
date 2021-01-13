@@ -13,6 +13,10 @@ class Appointment < ApplicationRecord
   belongs_to :therapist
   belongs_to :patient, optional: true
 
+  scope :manager_by_status, lambda { |therapist_id, status|
+    where('therapist_id = ? AND status = ?', therapist_id, status)
+  }
+
   class << self
     private
 

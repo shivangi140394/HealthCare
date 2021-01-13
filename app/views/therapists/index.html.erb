@@ -1,34 +1,30 @@
 <div class="row">
-  <div class="col-12 col-md-3">
-    <div class="mb-3">
-      <% if current_user.role.patient? %>
-        <% if @current_patient.present? %>
-          <%= link_to edit_patient_path(@current_patient), class: "btn btn-primary" do %>
+  <%= render partial: 'shared/personal_info' %>
+  <!-- <div> -->
+  <!--   <div class="mb-3">
+      <%# if current_user.role.patient? %>
+        <%# if @current_patient.present? %>
+          <%#= link_to edit_patient_path(@current_patient), class: "btn btn-primary" do %>
             Profile edit
-          <% end %>
-        <% else%>
-          <%= link_to new_patient_path, class: "btn btn-primary" do %>
+          <%# end %>
+        <%# else%>
+          <%#= link_to new_patient_path, class: "btn btn-primary" do %>
             Profile add
-          <% end %>
-        <% end %>
-      <% else %>
-        <% if @current_therapist.present?  %>
-          <%= link_to edit_therapist_path(@current_therapist), class: "btn btn-primary" do %>
+          <%# end %>
+        <%# end %>
+      <%# else %>
+        <%# if @current_therapist.present?  %>
+          <%#= link_to edit_therapist_path(@current_therapist), class: "btn btn-primary" do %>
             Profile edit
-          <% end %>
-        <% else%>
-          <%= link_to new_therapist_path, class: "btn btn-primary" do %>
+          <%# end %>
+        <%# else%>
+          <%#= link_to new_therapist_path, class: "btn btn-primary" do %>
             Profile add
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
-    <% if current_user.role.patient? %>
-      <div style='width: 800px;'>  
-        <div id="map" style='width: 280px; height: 300px;'></div>  
-      </div>
-    <% end %>
-  </div>
+          <%# end %>
+        <%# end %>
+      <%# end %>
+    </div> -->
+  <!-- </div> -->
     
   <div class="col">
     <div class="alert alert-primary">
@@ -36,44 +32,19 @@
         Welcome to the Healthcare
       </h4>
     </div>
-    <% if current_user.role.patient? %>
-      <%= render 'therapist'%>
-    <% end %>
     <% if @current_appointments.present? %>
-      <div class="col">
-        <h4>Appointments</h4>
+      <div class="card col" style="width: 50rem;">
+        <%= link_to therapist_appointments_path(@current_therapist.id) do %>
+          <div class="card-body">
+            <h5 class="card-title">Appointments</h5>
+            <h6 class="card-subtitle mb-2 text-muted">HealthCare</h6>
+            <p class="card-text">Hi Doctor...Your Current Appointments Are Here...<br>
+              <%= @current_appointments.count %></p>
+          </div>
+        <% end %>
       </div>
-      <%= render 'current_appointment'%>
+    <% else %>
+      You have No Appointment in Present...
     <% end %>
   </div>
 </div>
-
-<script type="text/javascript">  
-  handler = Gmaps.build('Google');
-  handler.buildMap({
-      provider: {
-        disableDefaultUI: true
-        // pass in other Google Maps API options here
-      },
-      internal: {
-        id: 'map'
-      }
-    },
-    function(){
-      markers = handler.addMarkers([
-        {
-          "lat": 0,
-          "lng": 0,
-          "picture": {
-            "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
-            "width":  32,
-            "height": 32
-          },
-          "infowindow": "hello!"
-        }
-      ]);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-    }
-  );
-</script>

@@ -13,7 +13,7 @@
         <td><%= appointment.patient.name %></td>
         <td><%= appointment.patient.phone %></td>
         <td><%= appointment.status %></td>
-        <td><%= link_to 'Detail', patient_path(appointment.patient, data: appointment.id) %></td>
+        <td><%= link_to 'Detail', therapist_appointment_path(id: appointment.id, therapist_id: appointment.therapist) %></td>
       </tr>
     </tbody>
   <% end %>

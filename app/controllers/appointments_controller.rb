@@ -1,12 +1,20 @@
 # frozen_string_literal: true
 
 class AppointmentsController < ApplicationController
+
   def index
     @appointments = Appointment.all
+    if params[:locale].present?
+      @therapist_appointments = Appointment.manager_by_status(params[:therapist_id], params[:locale])
+    else
+      @therapist_appointments = Appointment.where(therapist_id: params[:therapist_id])
+    end
+    current_login_user
   end
 
   def show
     @appointment = Appointment.find(params[:id])
+    current_login_user
   end
 
   def new
