@@ -28,6 +28,7 @@ class AppointmentsController < ApplicationController
                                    therapist_id: params[:appointment][:therapist_id],
                                    status: params[:appointment][:status])
     @appointment.save
+    redirect_back fallback_location: @appointment
   end
 
   def update
@@ -56,5 +57,6 @@ class AppointmentsController < ApplicationController
     @therapist = Therapist.find(params[:appointment][:therapist_id])
     AppointmentBookingMailer.with(data: @appointment, patient: @patient,
                                   therapist: @therapist).cancle_appointment_booking.deliver_now
+    redirect_back fallback_location: @appointment
   end
 end

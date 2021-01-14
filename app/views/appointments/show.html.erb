@@ -15,7 +15,7 @@
         </div>
         <% unless ('confirm' 'cancle').include? @appointment.status  %>
           <div class="col-sm-6 text-right">
-            <%= link_to cancle_appointment_appointment_path( patient_id: @appointment.patient, therapist_id: @appointment.therapist, id: @appointment, status: :cancle), remote: true, class: 'btn btn-primary pull-right ml-10 w-35' do %>
+            <%= link_to cancle_appointment_appointment_path( patient_id: @appointment.patient, therapist_id: @appointment.therapist, id: @appointment, status: :cancel), remote: true, class: 'btn btn-primary pull-right ml-10 w-35' do %>
               Cancle Appointment
             <% end %>
             <%= link_to appointment_path( patient_id: @appointment.patient, therapist_id: @appointment.therapist, id: @appointment, status: :confirm), method: :put, class: 'btn btn-primary pull-right m-l-10 w-35' do %>
