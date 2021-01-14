@@ -11,11 +11,19 @@
           <%= link_to edit_patient_path(@current_patient), class: "btn btn-outline-primary" do %>
             Profile edit
           <% end %>
+          <div class='card'></div>
+          <%= link_to patient_path(@current_patient), class: "btn btn-outline-primary" do %>
+            Show Profile
+          <% end %>
         <% else %>
           <h4><%= current_user.therapists.first.name %></h4>
           <br>
           <%= link_to edit_therapist_path(@current_therapist), class: "btn btn-outline-primary" do %>
             Profile edit
+          <% end %>
+          <div class='card'></div>
+          <%= link_to therapist_path(@current_therapist), class: "btn btn-outline-primary" do %>
+            Show Profile
           <% end %>
         <% end %>
         </p>
@@ -34,7 +42,7 @@
       <% end %>
     <% end %>
 
-    <% if current_user.role.therapist? &&  @current_therapist.appointments.present? %>
+    <% if current_user.role.therapist? &&  @current_therapist&.appointments.present? %>
       <%= link_to therapist_appointments_path(@current_therapist.id), class: "btn btn-outline-primary" do %>
         Appointments
       <% end %>
@@ -44,7 +52,7 @@
       <% end %>
     <% end %>
 
-    <% if current_user.role.patient? && @current_patient.appointments.present? %>
+    <% if current_user.role.patient? && @current_patient&.appointments.present? %>
       <%= link_to  patient_patient_appointments_path(@current_patient), class: 'btn btn-outline-primary' do %>
         Confirm Appointment
       <% end %>

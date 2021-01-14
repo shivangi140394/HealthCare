@@ -1,100 +1,103 @@
-<main class="main-content">
-  <div class="row heading-border-line">
-    <div class="col-lg-6 text-left">
-      <%= link_to  do %>
-        <span>
-          <%= image_tag 'back-arrow.png' %>
-        </span>
-      <% end %>
-      <span class="mrg-left-5 h4">
-        <%= @patient.name %>
-      </span>
-    </div>
-    <% if current_user.role.therapist? %>
-      <% unless ('confirm' 'cancle').include? @appointment.status  %>
-        <div class="col-sm-6 text-right">
-          <%= link_to cancle_appointment_appointment_path( patient_id: @patient, therapist_id: @current_therapist, id: @appointment, status: :cancle), remote: true, class: 'btn edit-user btn-primary pull-right m-l-15 w-25' do %>
-            Cancle Appointment
+<div class="row">
+  <%= render partial: 'shared/personal_info' %>
+  <div class="col">
+  <main class="main-content">
+      <div class="row heading-border-line">
+        <div class="col-lg-6 text-left">
+          <%= link_to root_path do %>
+            <span>
+              <%= image_tag 'back-arrow.png' %>
+            </span>
           <% end %>
-          <%= link_to appointment_path( patient_id: @patient, therapist_id: @current_therapist, id: @appointment, status: :confirm), method: :put, class: 'btn edit-user btn-primary pull-right m-l-15 w-25' do %>
-            Confirm Appointment
-          <% end %>
+          <span class="h4">
+            <%= @patient.name %>
+          </span>
         </div>
-      <% end %>
-    <% end %>
-</main>
-</div>
+      </div>
+    </main>
+    <div class="card">
+      <h5 class="card-header">
+        Personal Information
+      </h5>
+      <div class="card-body">
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="font-weight-bold">Name</div>
+              <div>
+                <i> <%= @patient.name %></i>
+              </div>
+            </div>
+          
+            <div class="col-md-6">
+              <div class="font-weight-bold">Contact Info</div>
+              <div> 
+                <i> <%= @patient.phone %></i>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<div class="col-md-4"></div>
-<div class="row card">
-  <div class="col-md-8">
-    <h4 class="m-l-15 text-left mrg-top-15 mrg-bottom-15">Personal Info</h4></br>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="font-weight-bold">Name</div>
-        <div>
-          <%= @patient.name %>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="font-weight-bold">Address</div>
+              <div>
+                <i> <%= @patient.address %></i>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="font-weight-bold">City</div>
+              <div>
+                <i> <%= @patient.city %> </i>
+              </div>
+            </div>
+          </div>
+          <div class="row mrg-top-5">
+            <div class="col-md-6">
+              <div class="font-weight-bold">State</div>
+              <div>
+                <i><%= @patient.state %> </i>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    
-	    <div class="col-md-4">
-	      <div class="font-weight-bold">Contact Info</div>
-	      <div>
-	        <%= @patient.phone %>
-	      </div>
-	    </div>
-    </div>
-  </div>
 
-  <div class="col-md-4"></div>
-  <div class="col-md-8 mrg-bottom-15">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="font-weight-bold">Address</div>
-        <div>
-          <%= @patient&.address %>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="font-weight-bold">Gender</div>
+              <div>
+                <i> <%= @patient.gender  %></i>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="font-weight-bold">Description</div>
+              <div>
+                <i> <%= @patient.description  %></i>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="font-weight-bold">City</div>
-        <div>
-          <%= @patient&.city %>
+
+        <div class="col-md-4"></div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="font-weight-bold">Reports</div>
+                <div>
+                   <% if @patient.images.attached? %>
+                    <% @patient.images.each do |image| %>
+                      <span class="col">
+                        <%= image_tag image, style: 'width: 200px; display: block', class: 'img-thumbnail' %> 
+                      </span>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>  
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="row mrg-top-5">
-      <div class="col-md-4">
-        <div class="font-weight-bold">State</div>
-        <div>
-          <%= @patient&.state %>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="font-weight-bold">Gender</div>
-        <div>
-          <%= @patient&.gender %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4"></div>
-  <div class="col-md-8">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="font-weight-bold">Description</div>
-        <div>
-          <%= @patient&.description %>
-        </div>
-      </div>  
-    </div>
-    <div class="row">
-      <div class="col">
-        <div class="font-weight-bold">Reports</div>
-        <% if @patient.images.attached? %>
-          <% @patient.images.each do |image| %>
-            <%= image_tag image, style: 'width: 200px; display: block', class: 'img-thumbnail' %>
-          <% end %>
-        <% end %>
       </div>
     </div>
   </div>

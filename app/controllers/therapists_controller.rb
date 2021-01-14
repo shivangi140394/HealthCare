@@ -16,6 +16,7 @@ class TherapistsController < ApplicationController
 
   def show
     @current_patient = Patient.find_by_user_id(current_user.id)
+    current_login_user
   end
 
   def new

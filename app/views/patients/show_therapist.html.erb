@@ -12,6 +12,11 @@
           <span class="h4">
             <%= @show_therapist.name %>
           </span>
+          <span class="h4">
+            <%= link_to new_appointment_path(therapist_id: params[:id], patient_id: @current_patient, status: :book), remote: true, class: 'btn btn-primary pull-right' do %>
+              Book Appointment
+            <% end %>
+          </span>
         </div>
       </div>
     </main>

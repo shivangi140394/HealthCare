@@ -23,26 +23,34 @@
 
         <% unless current_user.role.therapist? %>
           <div class="card col" style="width: 18rem;">
-            <%= link_to patient_therapists_path(@current_patient.id) do %>
-              <div class="card-body">
-                <h5 class="card-title">Therapist Available</h5>
-                <h6 class="card-subtitle mb-2 text-muted">HealthCare</h6>
-                <p class="card-text">Number of doctor Available.<br>
-                  <%= @therapists.count %></p>
-              </div>
+            <% if @current_patient.present? %>
+              <%= link_to patient_therapists_path(@current_patient.id) do %>
+                <div class="card-body">
+                  <h5 class="card-title">Therapist Available</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">HealthCare</h6>
+                  <p class="card-text">Number of doctor Available.<br>
+                    <%= @therapists.count %></p>
+                </div>
+              <% end %>
+            <%else%>
+              Please Register yourself first...
             <% end %>
           </div>
         <% end %>
 
         <% if @appointments.present? %>
           <div class="card col" style="width: 18rem;">
-            <%= link_to therapist_appointments_path(@current_therapist.id) do %>
-              <div class="card-body">
-                <h5 class="card-title">Appointments</h5>
-                <h6 class="card-subtitle mb-2 text-muted">HealthCare</h6>
-                <p class="card-text">Hi Doctor...Your Current Appointments Are Here...<br>
-                  <%= @appointments.count %></p>
-              </div>
+            <% if @current_therapist.present? %>
+              <%= link_to therapist_appointments_path(@current_therapist.id) do %>
+                <div class="card-body">
+                  <h5 class="card-title">Appointments</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">HealthCare</h6>
+                  <p class="card-text">Hi Doctor...Your Current Appointments Are Here...<br>
+                    <%= @appointments.count %></p>
+                </div>
+              <% end %>
+            <% else %>
+              Please Register yourself first...
             <% end %>
           </div>
         <% end %>
